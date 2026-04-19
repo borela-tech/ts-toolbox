@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "target": "ESNext",
+  },
+  "include": [
+    "./src/**/*",
+    "./eslint.config.ts",
+    "./jest.config.ts",
+    "./vite.config.ts",
+  ],
+}
