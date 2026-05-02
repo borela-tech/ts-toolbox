@@ -1,3 +1,8 @@
+/**
+ * Recursively freezes an object to make it immutable.
+ * This function mutates the input object.
+ * @public
+ */
 export function deepFreeze<T>(v: T, seen = new WeakSet()): T {
   if (v === null || typeof v !== 'object')
     return v

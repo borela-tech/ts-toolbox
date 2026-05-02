@@ -1,3 +1,7 @@
+/**
+ * Removes common leading whitespace from a template literal string.
+ * @public
+ */
 export function dedent(
   strings: TemplateStringsArray,
   ..._values: unknown[]

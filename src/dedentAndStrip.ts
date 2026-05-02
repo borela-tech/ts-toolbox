@@ -1,5 +1,9 @@
 import {dedent} from './dedent.js'
 
+/**
+ * Removes common leading whitespace and strips leading/trailing empty lines from a template literal string.
+ * @public
+ */
 export function dedentAndStrip(
   strings: TemplateStringsArray,
   ..._values: unknown[]

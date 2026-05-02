@@ -2,6 +2,10 @@ import type {AnyFunction} from './AnyFunction.js'
 import type {AsyncDebouncedFunction} from './AsyncDebouncedFunction.js'
 import type {Maybe} from './Maybe.js'
 
+/**
+ * Creates an asynchronous debounced version of the provided function.
+ * @public
+ */
 export function debounceAsync<T extends AnyFunction>(
   targetFunction: T,
 ): AsyncDebouncedFunction<T> {
