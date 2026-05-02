@@ -14,8 +14,8 @@ export function debounceAsync<T extends AnyFunction>(
     if (timeoutId)
       clearTimeout(timeoutId)
     return new Promise(resolve => {
-      timeoutId = setTimeout(() => {
-        targetFunction(...args)
+      timeoutId = setTimeout(async () => {
+        await targetFunction(...args)
         resolve()
       }, delay)
     })
