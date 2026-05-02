@@ -1,7 +1,8 @@
 import type {MaybePromise} from './MaybePromise.js'
 
 /**
- * Interface representing the result of creating a promise, providing access to the promise itself and its resolve/reject controllers.
+ * Interface representing the result of creating a promise, providing access to
+ * the promise itself and its resolve/reject controllers.
  * @public
  */
 export interface CreatePromiseResult<T> {

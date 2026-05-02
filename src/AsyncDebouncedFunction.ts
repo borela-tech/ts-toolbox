@@ -1,12 +1,12 @@
 import type {AnyFunction} from './AnyFunction.js'
-import type {DebouncedResult} from './DebouncedResult.js'
+import type {DebouncedCallResult} from './DebouncedCallResult'
 
 /**
  * A type representing an asynchronous debounced function.
- * Canceled calls resolve with DebouncedCallCancelled.
+ * Canceled calls resolve with debouncedCallCancelled.
  * @public
  */
 export type AsyncDebouncedFunction<T extends AnyFunction> = (
   delay: number,
   ...args: Parameters<T>
-) => Promise<DebouncedResult<T>>
+) => Promise<DebouncedCallResult<T>>

@@ -1,7 +1,7 @@
-import {DebouncedCallCancelled} from './DebouncedCallCancelledError.js'
+import {debouncedCallCancelled} from './debouncedCallCancelled'
 import type {AnyFunction} from './AnyFunction.js'
 import type {AsyncDebouncedFunction} from './AsyncDebouncedFunction.js'
-import type {DebouncedResult} from './DebouncedResult.js'
+import type {DebouncedCallResult} from './DebouncedCallResult'
 import type {Maybe} from './Maybe.js'
 
 /**
@@ -12,17 +12,16 @@ export function debounceAsync<T extends AnyFunction>(
   targetFunction: T,
 ): AsyncDebouncedFunction<T> {
   let timeoutId: Maybe<ReturnType<typeof setTimeout>>
-  let resolveCurrent: Maybe<(value: DebouncedResult<T>) => void>
+  let resolveCurrent: Maybe<(value: DebouncedCallResult<T>) => void>
   return (delay, ...args) => {
     if (resolveCurrent)
-      resolveCurrent(DebouncedCallCancelled)
+      resolveCurrent(debouncedCallCancelled)
 
     if (timeoutId)
       clearTimeout(timeoutId)
 
     return new Promise((resolve, reject) => {
       resolveCurrent = resolve
-
       timeoutId = setTimeout(async () => {
         try {
           const result = await targetFunction(...args)
