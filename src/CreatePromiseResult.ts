@@ -1,4 +1,4 @@
-import type {MaybePromise} from './MaybePromise.js'
+import type {MaybePromise} from './MaybePromise'
 
 /**
  * Interface representing the result of creating a promise, providing access to

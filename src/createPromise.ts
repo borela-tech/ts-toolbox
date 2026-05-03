@@ -1,5 +1,5 @@
-import type {CreatePromiseResult} from './CreatePromiseResult.js'
-import type {MaybePromise} from './MaybePromise.js'
+import type {CreatePromiseResult} from './CreatePromiseResult'
+import type {MaybePromise} from './MaybePromise'
 
 /**
  * Creates a promise and returns its controllers (resolve, reject) along with

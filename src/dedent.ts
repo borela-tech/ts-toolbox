@@ -18,7 +18,7 @@ export function dedent(
 
   let minIndent = Infinity
   for (const line of lines) {
-    const trimmed = line.trimEnd()
+    const trimmed = line.trimStart()
     if (trimmed.length === 0)
       continue
 
@@ -30,10 +30,13 @@ export function dedent(
     minIndent = 0
 
   const dedented = lines.map(line => {
-    if (line.trimEnd().length === 0)
+    if (line.trim().length === 0)
       return ''
     return line.slice(minIndent)
   })
+
+  while (dedented.length > 0 && dedented[0] === '')
+    dedented.shift()
 
   return dedented.join('\n')
 }

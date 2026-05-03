@@ -1,4 +1,4 @@
-import {dedent} from './dedent.js'
+import {dedent} from './dedent'
 
 /**
  * Removes common leading whitespace and strips leading/trailing empty lines
@@ -18,6 +18,13 @@ export function dedentAndStrip(
 
   while (lines.length > 0 && lines[lines.length - 1].trim() === '')
     lines.pop()
+
+  if (lines.length > 0)
+    lines[0] = lines[0].trimStart()
+
+  // Trim trailing whitespace from the last line
+  if (lines.length > 0)
+    lines[lines.length - 1] = lines[lines.length - 1].trimEnd()
 
   return lines.join('\n')
 }
