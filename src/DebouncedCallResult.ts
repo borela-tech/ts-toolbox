@@ -1,4 +1,4 @@
-import type {AnyFunction} from './AnyFunction.js'
+import type {AnyFunction} from './AnyFunction'
 import type {debouncedCallCancelled} from './debouncedCallCancelled'
 
 /**
