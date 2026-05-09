@@ -3,10 +3,9 @@ import type {DebouncedCallResult} from './DebouncedCallResult'
 
 /**
  * A type representing a debounced function.
- * Canceled calls resolve with debouncedCallCancelled.
  * @public
  */
-export type DebouncedFunction<T extends AnyFunction> = (
-  delay: number,
-  ...args: Parameters<T>
-) => Promise<DebouncedCallResult<T>>
+export type DebouncedFunction<T extends AnyFunction> =
+  Parameters<T> extends [...infer Rest, AbortSignal]
+    ? (delay: number, ...args: Rest) => Promise<DebouncedCallResult<T>>
+    : never
