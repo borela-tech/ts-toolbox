@@ -7,7 +7,7 @@ describe('dedent', () => {
       line 2
       line 3
     `
-    expect(result).toBe('line 1\nline 2\nline 3\n')
+    expect(result).toBe('line 1\nline 2\nline 3')
   })
 
   it('should handle single line strings', () => {
@@ -25,7 +25,7 @@ describe('dedent', () => {
       line 1
       line 2
     `
-    expect(result).toBe('line 1\nline 2\n')
+    expect(result).toBe('line 1\nline 2')
   })
 
   it('should handle mixed indentation', () => {
@@ -34,7 +34,7 @@ describe('dedent', () => {
         level 2
       level 1 again
     `
-    expect(result).toBe('level 1\n  level 2\nlevel 1 again\n')
+    expect(result).toBe('level 1\n  level 2\nlevel 1 again')
   })
 
   it('should handle lines with only whitespace', () => {
@@ -43,7 +43,7 @@ describe('dedent', () => {
   
       line 3
     `
-    expect(result).toBe('line 1\n\nline 3\n')
+    expect(result).toBe('line 1\n\nline 3')
   })
 
   it('should handle completely empty lines in between', () => {
@@ -52,7 +52,7 @@ describe('dedent', () => {
 
       line 3
     `
-    expect(result).toBe('line 1\n\nline 3\n')
+    expect(result).toBe('line 1\n\nline 3')
   })
 
   it('should handle tab indentation', () => {
@@ -60,7 +60,7 @@ describe('dedent', () => {
       line 1
       line 2
     `
-    expect(result).toBe('line 1\nline 2\n')
+    expect(result).toBe('line 1\nline 2')
   })
 
   it('should handle mixed tabs and spaces', () => {
@@ -68,7 +68,7 @@ describe('dedent', () => {
        line 1
       line 2
     `
-    expect(result).toBe(' line 1\nline 2\n')
+    expect(result).toBe(' line 1\nline 2')
   })
 
   it('should not trim trailing whitespace on content lines', () => {
@@ -76,7 +76,7 @@ describe('dedent', () => {
       line 1   
       line 2
     `
-    expect(result).toBe('line 1   \nline 2\n')
+    expect(result).toBe('line 1   \nline 2')
   })
 
   it('should handle no indentation', () => {
@@ -92,7 +92,7 @@ describe('dedent', () => {
             line 1
             line 2
     `
-    expect(result).toBe('line 1\nline 2\n')
+    expect(result).toBe('line 1\nline 2')
   })
 
   it('should preserve internal whitespace', () => {
@@ -100,6 +100,6 @@ describe('dedent', () => {
       line    with    spaces
       line 2
     `
-    expect(result).toBe('line    with    spaces\nline 2\n')
+    expect(result).toBe('line    with    spaces\nline 2')
   })
 })
