@@ -1,5 +1,5 @@
-import {resolveString} from '../shared/resolveString'
 import {dedentLines} from '../dedentLines'
+import {resolveString} from '../shared/resolveString'
 
 /**
  * Removes common leading whitespace from a template literal string.

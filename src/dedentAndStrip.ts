@@ -18,6 +18,8 @@ export function dedentAndStrip(
   ...values: unknown[]
 ): string
 
+////////////////////////////////////////////////////////////////////////////////
+
 export function dedentAndStrip(
   stringsOrContent: string | TemplateStringsArray,
   ..._values: unknown[]
