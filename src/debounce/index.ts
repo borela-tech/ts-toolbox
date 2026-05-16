@@ -1,27 +1,12 @@
 import {debouncedCallCancelled} from './debouncedCallCancelled'
-import type {AnyFunction} from './AnyFunction'
+import type {AnyFunction} from '../AnyFunction'
 import type {DebouncedCallResult} from './DebouncedCallResult'
 import type {DebouncedFunction} from './DebouncedFunction'
-import type {Maybe} from './Maybe'
+import type {DebouncedFunctionParameters} from './DebouncedFunctionParameters'
+import type {Nullish} from '../Nullish'
 
 type ResolveFunction<T extends AnyFunction> =
   (value: DebouncedCallResult<T>) => void
-
-async function runFunction<T extends AnyFunction>(
-  targetFunction: T,
-  args: unknown[],
-  abortSignal: AbortSignal,
-): Promise<DebouncedCallResult<T>> {
-  if (abortSignal.aborted)
-    return debouncedCallCancelled
-
-  const result = await targetFunction(...args, abortSignal)
-
-  if (abortSignal.aborted)
-    return debouncedCallCancelled
-
-  return result as DebouncedCallResult<T>
-}
 
 /**
  * Creates a debounced version of the provided function.
@@ -30,10 +15,10 @@ async function runFunction<T extends AnyFunction>(
  */
 export function debounce<T extends AnyFunction>(f: T): DebouncedFunction<T> {
   let abortController = new AbortController()
-  let currentResolve: Maybe<ResolveFunction<T>>
-  let timeoutId: Maybe<NodeJS.Timeout>
+  let currentResolve: Nullish<ResolveFunction<T>>
+  let timeoutId: Nullish<NodeJS.Timeout>
 
-  return (async (delay, ...args) => {
+  return (delay: number, ...args: DebouncedFunctionParameters<T>) => {
     abortController.abort()
 
     if (timeoutId)
@@ -49,16 +34,24 @@ export function debounce<T extends AnyFunction>(f: T): DebouncedFunction<T> {
     } = Promise.withResolvers<DebouncedCallResult<T>>()
 
     currentResolve = resolve
-    timeoutId = setTimeout(() => {
-      runFunction(f, args, abortController.signal)
-        .then(result => {
-          resolve(result)
-        })
-        .catch(error => {
-          reject(error)
-        })
+    timeoutId = setTimeout(async () => {
+      try {
+        const abortSignal = abortController.signal
+
+        if (abortSignal.aborted)
+          return resolve(debouncedCallCancelled)
+
+        const result = await f(...args, abortSignal)
+
+        if (abortSignal.aborted)
+          return resolve(debouncedCallCancelled)
+
+        resolve(result as DebouncedCallResult<T>)
+      } catch (error) {
+        reject(error)
+      }
     }, delay)
 
     return promise
-  }) as DebouncedFunction<T>
+  }
 }
