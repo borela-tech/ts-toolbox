@@ -24,7 +24,7 @@ export function dedentAndStrip(
   stringsOrContent: string | TemplateStringsArray,
   ..._values: unknown[]
 ): string {
-  const lines = dedentLines(resolveString(stringsOrContent), false)
+  const lines = dedentLines(resolveString(stringsOrContent))
 
   while (lines.length > 0 && lines[0].trim() === '')
     lines.shift()

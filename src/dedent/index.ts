@@ -1,11 +1,11 @@
 import {dedentLines} from '../dedentLines'
-import {resolveString} from '../shared/resolveString'
+import {interpolate} from '../interpolate'
 
 /**
  * Removes common leading whitespace from a template literal string.
  * @public
  */
-export function dedent(strings: TemplateStringsArray): string
+export function dedent(strings: TemplateStringsArray, ...values: unknown[]): string
 
 /**
  * Removes common leading whitespace from a regular string.
@@ -17,8 +17,12 @@ export function dedent(content: string): string
 
 export function dedent(
   stringsOrContent: string | TemplateStringsArray,
+  ...values: unknown[]
 ): string {
-  const isTemplateLiteral = typeof stringsOrContent !== 'string'
-  const fullString = resolveString(stringsOrContent)
-  return dedentLines(fullString, isTemplateLiteral).join('\n')
+  if (typeof stringsOrContent !== 'string') {
+    const interpolated = interpolate(stringsOrContent, ...values)
+    return dedentLines(interpolated).join('\n')
+  }
+
+  return dedentLines(stringsOrContent).join('\n')
 }
