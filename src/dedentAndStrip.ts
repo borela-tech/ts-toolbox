@@ -1,4 +1,12 @@
-import {dedent} from './dedent'
+import {dedentLines} from './dedentLines'
+import {resolveString} from './shared/resolveString'
+
+/**
+ * Removes common leading whitespace and strips leading/trailing empty lines
+ * from a string.
+ * @public
+ */
+export function dedentAndStrip(content: string): string
 
 /**
  * Removes common leading whitespace and strips leading/trailing empty lines
@@ -7,11 +15,14 @@ import {dedent} from './dedent'
  */
 export function dedentAndStrip(
   strings: TemplateStringsArray,
+  ...values: unknown[]
+): string
+
+export function dedentAndStrip(
+  stringsOrContent: string | TemplateStringsArray,
   ..._values: unknown[]
 ): string {
-  const result = dedent(strings)
-
-  const lines = result.split('\n')
+  const lines = dedentLines(resolveString(stringsOrContent), false)
 
   while (lines.length > 0 && lines[0].trim() === '')
     lines.shift()
