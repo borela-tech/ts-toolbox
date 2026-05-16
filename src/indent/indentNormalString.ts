@@ -1,6 +1,6 @@
 import {createIndentString} from './createIndentString'
 
-export function indentLines(
+export function indentNormalString(
   content: string,
   count: number,
   indentUnit: string,

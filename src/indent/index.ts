@@ -1,7 +1,5 @@
-import {createIndentString} from './createIndentString'
-import {indentLines} from './indentLines'
-import {removeFirstLineIfEmpty} from '../shared/removeFirstLineIfEmpty'
-import {removeLastLineIfEmpty} from '../shared/removeLastLineIfEmpty'
+import {indentNormalString} from './indentNormalString'
+import {indentTemplateString} from './indentTemplateString'
 
 const DEFAULT_COUNT = 1
 const DEFAULT_INDENT_UNIT = '  '
@@ -66,26 +64,13 @@ export function indent(
   if (isTemplateMode) {
     const count = (arg1 as number | undefined) ?? DEFAULT_COUNT
     const indentUnit = (arg2 as string | undefined) ?? DEFAULT_INDENT_UNIT
-
-    return (strings: TemplateStringsArray) => {
-      const fullString = strings.raw.join('')
-      const lines = fullString.split('\n')
-
-      removeFirstLineIfEmpty(lines)
-      removeLastLineIfEmpty(lines)
-
-      const indentStr = createIndentString(count, indentUnit)
-      const indentedLines = lines.map(
-        line => line === '' ? line : indentStr + line,
-      )
-
-      return indentedLines.join('\n')
-    }
+    return (strings: TemplateStringsArray) =>
+      indentTemplateString(strings, count, indentUnit)
   }
 
-  const content = arg1 as string
-  const count = (arg2 as number | undefined) ?? DEFAULT_COUNT
-  const indentUnit = arg3 ?? DEFAULT_INDENT_UNIT
-
-  return indentLines(content, count, indentUnit)
+  return indentNormalString(
+    arg1 as string,
+    (arg2 as number | undefined) ?? DEFAULT_COUNT,
+    arg3 ?? DEFAULT_INDENT_UNIT,
+  )
 }
