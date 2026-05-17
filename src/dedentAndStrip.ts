@@ -22,9 +22,10 @@ export function dedentAndStrip(
 
 export function dedentAndStrip(
   stringsOrContent: string | TemplateStringsArray,
-  ..._values: unknown[]
+  ...values: unknown[]
 ): string {
-  const lines = dedentLines(resolveString(stringsOrContent))
+  const resolvedString = resolveString(stringsOrContent, ...values)
+  const lines = dedentLines(resolvedString)
 
   while (lines.length > 0 && lines[0].trim() === '')
     lines.shift()

@@ -1,6 +1,13 @@
-export function resolveString(value: string | TemplateStringsArray): string {
-  const isTemplateLiteral = typeof value !== 'string'
-  return isTemplateLiteral
-    ? value.raw.join('')
-    : value
+import {interpolate} from '../interpolate'
+
+export function resolveString(
+  stringOrContent: string | TemplateStringsArray,
+  ...values: unknown[]
+): string {
+  const isTemplateLiteral = typeof stringOrContent !== 'string'
+
+  if (isTemplateLiteral)
+    return interpolate(stringOrContent, ...values)
+
+  return stringOrContent
 }

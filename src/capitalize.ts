@@ -16,9 +16,10 @@ export function capitalize(content: string): string
 
 export function capitalize(
   stringsOrContent: string | TemplateStringsArray,
+  ...values: unknown[]
 ): string {
-  const fullString = resolveString(stringsOrContent)
-  if (fullString.length === 0)
-    return fullString
-  return fullString.charAt(0).toUpperCase() + fullString.slice(1)
+  const resolvedString = resolveString(stringsOrContent, ...values)
+  if (resolvedString.length === 0)
+    return resolvedString
+  return resolvedString.charAt(0).toUpperCase() + resolvedString.slice(1)
 }
