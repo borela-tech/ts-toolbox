@@ -14,6 +14,7 @@ const config = defineConfig({
     rolldownOptions: {
       external: [
         /^@?typescript/,
+        'fs',
         'path',
       ],
     },
