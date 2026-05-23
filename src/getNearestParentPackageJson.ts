@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import type {Undefinable} from './Undefinable'
 
 /**
  * Walks up from a directory to find the nearest parent `package.json`.
@@ -10,9 +9,7 @@ import type {Undefinable} from './Undefinable'
  * @returns The path to the nearest `package.json` or `undefined` if not found.
  * @public
  */
-export function getNearestParentPackageJson(
-  directoryPath: string,
-): Undefinable<string> {
+export function getNearestParentPackageJson(directoryPath: string) {
   let current = directoryPath
   const visited = new Set<string>()
 
