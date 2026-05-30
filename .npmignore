@@ -1,0 +1,14 @@
+.github/
+.idea/
+bin/
+src/
+
+.node-version
+api-extractor.json
+eslint.config.ts
+jest.config.ts
+tsconfig.build.json
+tsconfig.json
+vite.config.ts
+
+*.tgz
