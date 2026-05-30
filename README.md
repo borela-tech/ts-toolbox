@@ -1,5 +1,10 @@
 # @borela-tech/ts-toolbox
 
+[![CI](https://github.com/borela-tech/ts-toolbox/actions/workflows/ci.yml/badge.svg)](https://github.com/borela-tech/ts-toolbox/actions/workflows/ci.yml)
+[![npm version](https://badge.fury.io/js/@borela-tech%2Fts-toolbox.svg)](https://badge.fury.io/js/@borela-tech%2Fts-toolbox)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Node Version](https://img.shields.io/badge/node-v25.8.1-brightgreen)
+
 Shared TypeScript utilities for Borela Tech projects.
 
 A lightweight, **zero-runtime-dependency** collection of runtime functions and type-level utilities.
