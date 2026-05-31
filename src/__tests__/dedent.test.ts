@@ -138,19 +138,19 @@ describe('dedent', () => {
   })
 
   describe('template strings with interpolations', () => {
-    it('should interpolate values before dedenting', () => {
-      const name = 'world'
+    it('should interpolate values before dedent', () => {
+      const NAME = 'world'
       const result = dedent`
-        hello ${name}
+        hello ${NAME}
       `
       expect(result).toBe('hello world')
     })
 
     it('should align multiline interpolated values then dedent', () => {
-      const desc = 'line1\nline2'
+      const DESC = 'line1\nline2'
       const result = dedent`
         item:
-          ${desc}
+          ${DESC}
         done
       `
       expect(result).toBe('item:\n  line1\n  line2\ndone')
@@ -159,20 +159,20 @@ describe('dedent', () => {
     it(
       'should handle multiple interpolations with alignment and dedent',
       () => {
-        const a = 'deep\nthought'
-        const b = '42'
+        const A = 'deep\nthought'
+        const B = '42'
         const result = dedent`
-          ${a}
-          the answer is ${b}
+          ${A}
+          the answer is ${B}
         `
         expect(result).toBe('deep\nthought\nthe answer is 42')
       },
     )
 
     it('should preserve internal indentation of values after dedent', () => {
-      const code = '{\n  key: value\n}'
+      const CODE = '{\n  key: value\n}'
       const result = dedent`
-        const obj = ${code}
+        const obj = ${CODE}
       `
       expect(result).toBe('const obj = {\n  key: value\n}')
     })

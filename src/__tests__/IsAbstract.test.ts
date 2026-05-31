@@ -19,25 +19,25 @@ const arrowFunction = () => {}
 describe('IsAbstract', () => {
   it('returns true for abstract classes', () => {
     type Result = IsAbstract<typeof AbstractClass>
-    const verify: Equals<Result, true> = true
-    expect(verify).toBe(true)
+    const VERIFY: Equals<Result, true> = true
+    expect(VERIFY).toBe(true)
   })
 
   it('returns false for normal classes', () => {
     type Result = IsAbstract<typeof NormalClass>
-    const verify: Equals<Result, false> = true
-    expect(verify).toBe(true)
+    const VERIFY: Equals<Result, false> = true
+    expect(VERIFY).toBe(true)
   })
 
   it('returns false for regular function', () => {
     type Result = IsAbstract<typeof regularFunction>
-    const verify: Equals<Result, false> = true
-    expect(verify).toBe(true)
+    const VERIFY: Equals<Result, false> = true
+    expect(VERIFY).toBe(true)
   })
 
   it('returns false for arrow function', () => {
     type Result = IsAbstract<typeof arrowFunction>
-    const verify: Equals<Result, false> = true
-    expect(verify).toBe(true)
+    const VERIFY: Equals<Result, false> = true
+    expect(VERIFY).toBe(true)
   })
 })

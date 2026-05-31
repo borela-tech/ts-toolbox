@@ -4,8 +4,8 @@ import type {MaybePromise} from '..'
 describe('MaybePromise', () => {
   it('allows a direct value', () => {
     type Result = MaybePromise<string>
-    const verify: Equals<Result, PromiseLike<string> | string> = true
-    expect(verify).toBe(true)
+    const VERIFY: Equals<Result, PromiseLike<string> | string> = true
+    expect(VERIFY).toBe(true)
   })
 
   it('allows a Promise', () => {
@@ -20,7 +20,7 @@ describe('MaybePromise', () => {
       | number
       | PromiseLike<number | string>
       | string
-    const verify: Equals<Result, Expected> = true
-    expect(verify).toBe(true)
+    const VERIFY: Equals<Result, Expected> = true
+    expect(VERIFY).toBe(true)
   })
 })

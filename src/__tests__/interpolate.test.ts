@@ -3,10 +3,10 @@ import {interpolate} from '..'
 describe('interpolate', () => {
   describe('template strings', () => {
     it('should align multiline variable continuation lines', () => {
-      const var1 = 'line 1\nline 2'
+      const VAR1 = 'line 1\nline 2'
       const result = interpolate`
         hello
-        ${var1}
+        ${VAR1}
         world
       `
       expect(result).toBe(
@@ -15,13 +15,13 @@ describe('interpolate', () => {
     })
 
     it('should handle multiple interpolations with alignment', () => {
-      const a = 'line a1\nline a2'
-      const b = 'line b1\nline b2'
+      const A = 'line a1\nline a2'
+      const B = 'line b1\nline b2'
       const result = interpolate`
         start
-        ${a}
+        ${A}
         middle
-        ${b}
+        ${B}
         end
       `
       expect(result).toBe(
@@ -30,9 +30,9 @@ describe('interpolate', () => {
     })
 
     it('should not affect single-line string values', () => {
-      const name = 'world'
+      const NAME = 'world'
       const result = interpolate`
-        hello ${name}
+        hello ${NAME}
       `
       expect(result).toBe('        hello world')
     })
@@ -70,8 +70,8 @@ describe('interpolate', () => {
     it(
       'should handle value with no indentation prefix on insertion line',
       () => {
-        const x = 'a\nb'
-        const result = interpolate`value: ${x}`
+        const X = 'a\nb'
+        const result = interpolate`value: ${X}`
         expect(result).toBe('value: a\nb')
       },
     )
@@ -79,10 +79,10 @@ describe('interpolate', () => {
     it(
       'should indent continuation lines of multiline value after indented line',
       () => {
-        const desc = 'line1\nline2'
+        const DESC = 'line1\nline2'
         const result = interpolate`
         item:
-          ${desc}
+          ${DESC}
         done
       `
         expect(result).toBe(
@@ -92,17 +92,17 @@ describe('interpolate', () => {
     )
 
     it('should preserve internal indentation of the value', () => {
-      const code = 'fn() {\n  return 1\n}'
+      const CODE = 'fn() {\n  return 1\n}'
       const result = interpolate`
-        ${code}
+        ${CODE}
       `
       expect(result).toBe('        fn() {\n          return 1\n        }')
     })
 
     it('should handle interpolation in the middle of content', () => {
-      const name = 'Alice\nBob'
+      const NAME = 'Alice\nBob'
       const result = interpolate`
-        hello ${name}!
+        hello ${NAME}!
       `
       expect(result).toBe('        hello Alice\n        Bob!')
     })
