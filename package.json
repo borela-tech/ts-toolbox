@@ -1,6 +1,6 @@
 {
   "name": "@borela-tech/ts-toolbox",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Shared TypeScript utilities for Borela Tech projects.",
   "scripts": {
     "build": "./bin/build",

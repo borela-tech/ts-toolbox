@@ -63,8 +63,9 @@ capitalize`
 ### `debounce`
 
 Create a debounced function. Each call cancels the previous pending call. The
-target function receives an `AbortSignal` as the last argument. Canceled calls
-resolve to `debouncedCallCancelled`.
+target function automatically receives an `AbortSignal` as the last argument,
+but does not need to declare it if it is not used. Canceled calls resolve to 
+`debouncedCallCancelled`.
 
 ```ts
 import {
@@ -72,20 +73,27 @@ import {
   debouncedCallCancelled,
 } from '@borela-tech/ts-toolbox'
 
-const fn = async (x: number, signal: AbortSignal) => {
-  if (signal.aborted) 
-    return
-  return x * 2
-}
-
-const debouncedFn = debounce(fn)
-
 const DELAY = 100
+
+const fn = async (x: number) => x * 2
+const debouncedFn = debounce(fn)
 const a = debouncedFn(DELAY, 1) // Cancelled.
 const b = await debouncedFn(DELAY, 2) // Executed.
 
 console.log(a === debouncedCallCancelled) // => true
 console.log(b) // => 4
+
+const fnWithSignal = async (x: number, signal: AbortSignal) => {
+  if (signal.aborted)
+    return
+  return x * 2
+}
+const debouncedFnWithSignal = debounce(fnWithSignal)
+const c = debouncedFnWithSignal(DELAY, 3) // Cancelled.
+const d = await debouncedFnWithSignal(DELAY, 4) // Executed.
+
+console.log(c === debouncedCallCancelled) // => true
+console.log(d) // => 8
 ```
 
 ### `dedent`
@@ -242,7 +250,7 @@ import type {
   DebouncedFunctionParameters,
 } from '@borela-tech/ts-toolbox'
 
-type Fn = (x: number, signal: AbortSignal) => Promise<number>
+type Fn = (x: number) => Promise<number>
 
 type Params = DebouncedFunctionParameters<Fn> // [x: number]
 type Debounced = DebouncedFunction<Fn>
@@ -250,6 +258,10 @@ type Debounced = DebouncedFunction<Fn>
 
 type Result = DebouncedCallResult<Fn>
 // number | typeof debouncedCallCancelled
+
+// If the function declares AbortSignal as its last param, it's stripped:
+type FnWithSignal = (x: number, signal: AbortSignal) => Promise<number>
+type StrippedParams = DebouncedFunctionParameters<FnWithSignal> // [x: number]
 ```
 
 ### `Equals<X, Y>`
